@@ -9,14 +9,14 @@ else
   echo "File env does not exist. Creating env file";
 fi;
 
-echo "APP_NAME=intern_2" > .env;
+echo "APP_NAME=intern_5" > .env;
 echo "APP_ENV=development" >> .env;
 echo "APP_PORT=8080" >> .env;
 
 echo "DB_DIALECT=mysql" >> .env;
 echo "DB_HOST=10.0.2.142" >> .env;
-echo "DB_NAME=intern_2" >> .env;
-echo "DB_USER=intern_2" >> .env;
+echo "DB_NAME=intern_5" >> .env;
+echo "DB_USER=intern_5" >> .env;
 echo "DB_PASS=" >> .env;
 
 echo "SALT=8" >> .env;
