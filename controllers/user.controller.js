@@ -52,13 +52,17 @@ function loginUser(req, res, next) {
       if (data != null) {
         bcrypt.compare(password, data.password).then((result) => {
           if (result == true) {
-            res.status(200).send({...data.dataValues,token});
+            res.status(200).send({data,token});
           } else {
-            res.status(400).message("Wrong Password")
+            res.status(400).send({
+              message: "Wrong Password",
+            });
           }
-        })
+        });
       } else {
-        res.status(400).message("Wrong Email")        
+        res.status(400).send({
+          message:"Wrong Email"
+        });        
       }
     })
     .catch((err) => {
@@ -78,10 +82,27 @@ function loginUser(req, res, next) {
     });
 }
 
+function findOne(req, res, next) {
+  const id = req.params.id;
+  User.findByPk(id)
+    .then((data) => {
+        if(data == null){
+            res.status(500).send({
+                message: "Error User Not found",
+            });
+          }
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error in findOne",
+      });
+    });
+}
+
+
 module.exports = {
     registerUser,
-    // findAll,
     loginUser,
-    // update,
-    // destroy,
+    findOne,
   };

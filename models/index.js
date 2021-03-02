@@ -24,6 +24,5 @@ module.exports = {
     sequelize,
 
     // defining models
-    // tweets,
     user,
 }

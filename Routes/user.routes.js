@@ -11,5 +11,7 @@ router.post('/register', userController.registerUser)
 // login
 router.post('/login',  userController.loginUser)
 
+//getone
+router.get('/:id', userController.findOne)
 
 module.exports = router
