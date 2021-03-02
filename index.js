@@ -3,6 +3,7 @@ const express = require('express')
 const app = express();
 const db = require('./models')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 
 // const errorHandler = require("./utils/errorHandler")
 
@@ -11,14 +12,14 @@ db.sequelize.sync({ })
 
 //Routes
 const userRoute= require('./Routes/user.routes')
-// const categoriesRoute= require('./Routes/categories.routes')
+const categoriesRoute= require('./Routes/categories.routes')
 
 app.use(express.json())
 app.use(express.urlencoded( { extended: false}))
 
 app.use(cors())
 app.use('/user', userRoute)
-// app.use('/category', categoriesRoute)
+app.use('/categories', categoriesRoute)
 
 // app.use(errorHandler)
 
