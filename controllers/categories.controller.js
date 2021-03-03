@@ -2,14 +2,14 @@ const db = require("../models");
 const Categories = db.categories;
 
 // create categories
-function createCategories(req, res, next) {
-    Categories.create(req.body)
+function regCategories(req, res, next) {
+    Categories.create({ ...req.body, image: process.env.DEFAULT_IMAGE})
       .then((data) => {
-        res.send(data);
+        res.send({...data.dataValues});
       })
       .catch((err) => {
         res.status(500).send({
-          message: "Error in Create categories",
+          message:err, 
         });
       });
   }
@@ -42,7 +42,7 @@ function findAll(req, res, next) {
   }
 
   module.exports = {
-      createCategories,
+      regCategories,
       findAll,
       findOne,
   }

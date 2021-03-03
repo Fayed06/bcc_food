@@ -4,7 +4,7 @@ const categoriesController = require('../controllers/categories.controller')
 
 
 // register Categories
-router.post('/register', categoriesController.createCategories)
+router.post('/register', categoriesController.regCategories)
 
 // get all Categories
 router.get('/all',  categoriesController.findAll)
