@@ -13,7 +13,6 @@ const sequelize = new Sequelize(env.DB_NAME, env.DB_USER, env.DB_PASS, {
     }   
 })
 
-// const tweets = require("./tweet.model")(sequelize, Sequelize)
 const user = require("./user.model")(sequelize, Sequelize)
 const categories = require("./categories.model")(sequelize, Sequelize)
 const restaurants = require("./restaurants.model")(sequelize, Sequelize)

@@ -81,7 +81,7 @@ function loginUser(req, res, next) {
       return next(err)
     });
 }
-
+//cari satu user
 function findOne(req, res, next) {
   const id = req.params.id;
   User.findByPk(id)
@@ -100,9 +100,21 @@ function findOne(req, res, next) {
     });
 }
 
-
+//nampilkan semua user
+function findAll(req, res, next) {
+  restaurants.findAll()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error in findAll",
+      });
+    });
+}
 module.exports = {
     registerUser,
     loginUser,
     findOne,
+    findAll,
   };

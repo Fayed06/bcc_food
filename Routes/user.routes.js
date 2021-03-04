@@ -14,4 +14,7 @@ router.post('/login',  userController.loginUser)
 //getone
 router.get('/:id', userController.findOne)
 
+//getall
+router.get('/all', userController.findAll)
+
 module.exports = router
