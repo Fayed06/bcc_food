@@ -13,6 +13,7 @@ db.sequelize.sync({ })
 //Routes
 const userRoute= require('./Routes/user.routes')
 const categoriesRoute= require('./Routes/categories.routes')
+const restaurantRoute= require('./Routes/restaurant.routes')
 
 app.use(express.json())
 app.use(express.urlencoded( { extended: false}))
@@ -20,6 +21,7 @@ app.use(express.urlencoded( { extended: false}))
 app.use(cors())
 app.use('/user', userRoute)
 app.use('/categories', categoriesRoute)
+app.use('/restaurants', restaurantRoute)
 
 // app.use(errorHandler)
 

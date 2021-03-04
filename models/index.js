@@ -16,6 +16,7 @@ const sequelize = new Sequelize(env.DB_NAME, env.DB_USER, env.DB_PASS, {
 // const tweets = require("./tweet.model")(sequelize, Sequelize)
 const user = require("./user.model")(sequelize, Sequelize)
 const categories = require("./categories.model")(sequelize, Sequelize)
+const restaurants = require("./restaurants.model")(sequelize, Sequelize)
 
 // users.hasMany(tweets, {as:"tweets", onDelete : "cascade", onUpdate : "cascade"})
 // tweets.belongsTo(users, {foreignKey : "userId", as : "user"})
@@ -27,4 +28,5 @@ module.exports = {
     // defining models
     user,
     categories,
+    restaurants,
 }
