@@ -12,6 +12,9 @@ router.get('/all',  restocatController.findAll)
 // get one Categories
 router.get('/:id',  restocatController.findOne)
 
+router.delete('/delete/:id', restocatController.destroy)
+
+
 
 
 

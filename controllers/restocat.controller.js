@@ -47,9 +47,31 @@ function findAll(req, res, next) {
         });
       });
   }
+// delete
+function destroy(req, res, next) {
+  const id = req.params.id;
+  let condition = {
+    id: id,
+  };
 
+  Restocats.destroy({
+    where: condition,
+  })
+    .then((num) => {
+      if (num != 1) {
+        return next(err)
+      }
+      res.status(200).send({
+        message: "Delete successful",
+      });
+    })
+    .catch((err) => {
+      return next(err)
+    });
+}
   module.exports = {
       regCategories,
       findAll,
       findOne,
+      destroy,
   }
