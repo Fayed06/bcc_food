@@ -21,14 +21,20 @@ function findAll(req, res, next) {
       // where: {
       //   main: true
       // },
-      include: restoimg
+      include: [
+        {
+          model: restoimg,
+          where: {
+            main: true
+          },
+          required: false
+        }
+      ]
     })
     .then((data) => {
       const response = {
         status: "success",
-        data: {
-          ...data,
-        }
+        data: data,
       }
       res.send(response);
     })

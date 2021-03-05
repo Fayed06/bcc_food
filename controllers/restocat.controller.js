@@ -4,49 +4,54 @@ const restaurants = db.restaurants;
 
 // create categories
 function regCategories(req, res, next) {
-  Restocats.create({ ...req.body, image: process.env.DEFAULT_IMAGE})
-      .then((data) => {
-        res.send({...data.dataValues});
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message:err, 
-        });
+  Restocats.create({
+      ...req.body,
+      image: process.env.DEFAULT_IMAGE
+    })
+    .then((data) => {
+      res.send({
+        ...data.dataValues
       });
-  }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err,
+      });
+    });
+}
 
-  // findAll
+// findAll
 function findAll(req, res, next) {
-  Restocats.findAll({ include: restaurants})
-      .then((data) => {
-        const response = {
-          status: "success",
-          data: {
-            ...data,
-          }
-         }
-        res.send(response);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message,
-        });
+  Restocats.findAll({
+      include: restaurants
+    })
+    .then((data) => {
+      const response = {
+        status: "success",
+        data: data,
+      }
+      res.send(response);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message,
       });
-  }
-  
-  // findOne
-  function findOne(req, res, next) {
-    const id = req.params.id;
-    Restocats.findByPk(id)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: "Error in findOne",
-        });
+    });
+}
+
+// findOne
+function findOne(req, res, next) {
+  const id = req.params.id;
+  Restocats.findByPk(id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error in findOne",
       });
-  }
+    });
+}
 // delete
 function destroy(req, res, next) {
   const id = req.params.id;
@@ -55,8 +60,8 @@ function destroy(req, res, next) {
   };
 
   Restocats.destroy({
-    where: condition,
-  })
+      where: condition,
+    })
     .then((num) => {
       if (num != 1) {
         return next(err)
@@ -69,9 +74,9 @@ function destroy(req, res, next) {
       return next(err)
     });
 }
-  module.exports = {
-      regCategories,
-      findAll,
-      findOne,
-      destroy,
-  }
+module.exports = {
+  regCategories,
+  findAll,
+  findOne,
+  destroy,
+}
