@@ -14,11 +14,17 @@ const sequelize = new Sequelize(env.DB_NAME, env.DB_USER, env.DB_PASS, {
 })
 
 const user = require("./user.model")(sequelize, Sequelize)
-const categories = require("./categories.model")(sequelize, Sequelize)
 const restaurants = require("./restaurants.model")(sequelize, Sequelize)
+const restocats = require("./restocat.model")(sequelize, Sequelize)
+const CatRestocat = require("./CatRestocat.model")(sequelize, Sequelize, restaurants, restocats)
+const restoimg = require("./resto.img.model")(sequelize, Sequelize, restaurants)
 
-// users.hasMany(tweets, {as:"tweets", onDelete : "cascade", onUpdate : "cascade"})
-// tweets.belongsTo(users, {foreignKey : "userId", as : "user"})
+restaurants.belongsToMany(restocats,{through :'CatRestocat'})
+restocats.belongsToMany(restaurants,{through :'CatRestocat'})
+restaurants.hasMany(restoimg)
+restoimg.belongsTo(restaurants)
+
+
 
 module.exports = {
     Sequelize,
@@ -26,6 +32,8 @@ module.exports = {
 
     // defining models
     user,
-    categories,
+    CatRestocat,
     restaurants,
+    restocats,
+    restoimg,
 }

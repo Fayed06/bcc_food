@@ -12,16 +12,21 @@ db.sequelize.sync({ })
 
 //Routes
 const userRoute= require('./Routes/user.routes')
-const categoriesRoute= require('./Routes/categories.routes')
+const restocatRoute= require('./Routes/restocat.routes')
 const restaurantRoute= require('./Routes/restaurant.routes')
+const catrestocatRoute= require('./Routes/catrestocat.routes')
+const restoimgRoute= require('./Routes/restoimg.routes')
 
+//bodyparser
 app.use(express.json())
 app.use(express.urlencoded( { extended: false}))
 
 app.use(cors())
 app.use('/user', userRoute)
-app.use('/categories', categoriesRoute)
+app.use('/restocat', restocatRoute)
 app.use('/restaurants', restaurantRoute)
+app.use('/catrestocat', catrestocatRoute)
+app.use('/restoimg', restoimgRoute)
 
 // app.use(errorHandler)
 
