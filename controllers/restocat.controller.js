@@ -4,7 +4,7 @@ const restaurants = db.restaurants;
 
 // create categories
 function regCategories(req, res, next) {
-  Restocats.create({ ...req.body, image: process.env.DEFAULT_IMAGE})
+  Restocats.create({ ...req.body, image: process.env.CAT_IMAGE})
       .then((data) => {
         res.send({...data.dataValues});
       })
