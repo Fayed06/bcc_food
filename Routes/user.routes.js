@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/user.controller')
-// const joiValidator = require('../middlewares/joiValidator')
+const joiValidator = require('../middlewares/joiValidator')
 // const jwtMiddleware = require("../middlewares/jwtAuth")
 
 

@@ -14,6 +14,7 @@ const sequelize = new Sequelize(env.DB_NAME, env.DB_USER, env.DB_PASS, {
     },
 })
 
+//define routes
 const user = require("./user.model")(sequelize, Sequelize)
 const restaurants = require("./restaurants.model")(sequelize, Sequelize)
 const restocats = require("./restocat.model")(sequelize, Sequelize)
@@ -22,7 +23,9 @@ const restoimg = require("./resto.img.model")(sequelize, Sequelize, restaurants)
 const food = require("./food.model")(sequelize, Sequelize, restaurants)
 const foodCategory = require("./food_categories.model")(sequelize, Sequelize)
 const foodhascategory = require("./foodhascategory.model")(sequelize, Sequelize, restaurants, foodCategory)
+const bookingpacket = require("./booking_packet.model")(sequelize, Sequelize)
 
+//define relationship
 restaurants.belongsToMany(restocats,{through :'CatRestocat'})
 restocats.belongsToMany(restaurants,{through :'CatRestocat'})
 restaurants.hasMany(restoimg)
@@ -33,6 +36,7 @@ food.belongsToMany(foodCategory,{through :'food_has_categories'})
 foodCategory.belongsToMany(food,{through :'food_has_categories'})
 
 
+sequelize.sync({alter: true})
 module.exports = {
     Sequelize,
     sequelize,
@@ -46,4 +50,5 @@ module.exports = {
     food,
     foodCategory,
     foodhascategory,
+    bookingpacket,
 }
