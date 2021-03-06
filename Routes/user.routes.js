@@ -17,6 +17,6 @@ router.get('/:id', userController.findOne)
 //getall
 router.get('/all', userController.findAll)
 
-router.get('/delete/:id', userController.destroy)
+router.delete('/delete/:id', userController.destroy)
 
 module.exports = router
