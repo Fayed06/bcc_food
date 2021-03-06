@@ -102,6 +102,7 @@ function findOne(req, res, next) {
         res.status(404).send({
           message: "Error User Not found",
         });
+        
       }
       res.send(data);
     })

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/user.controller')
-const joiValidator = require('../middlewares/joiValidator')
+// const joiValidator = require('../middlewares/joiValidator')
 // const jwtMiddleware = require("../middlewares/jwtAuth")
 
 
@@ -16,5 +16,7 @@ router.get('/:id', userController.findOne)
 
 //getall
 router.get('/all', userController.findAll)
+
+router.get('/delete/:id', userController.destroy)
 
 module.exports = router

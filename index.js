@@ -5,7 +5,7 @@ const db = require('./models')
 const cors = require('cors')
 // const bodyParser = require('body-parser')
 
-// const errorHandler = require("./utils/errorHandler")
+const errorHandler = require("./utils/errorHandler")
 
 
 db.sequelize.sync({ })
@@ -28,7 +28,7 @@ app.use('/restaurants', restaurantRoute)
 app.use('/catrestocat', catrestocatRoute)
 app.use('/restoimg', restoimgRoute)
 
-// app.use(errorHandler)
+app.use(errorHandler)
 
 app.use('/', (req, res)=> {
     res.send({
