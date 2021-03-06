@@ -4,7 +4,11 @@ module.exports = (sequelize, Sequelize) =>{
             type : Sequelize.STRING,
             allowNull : false,
         },
-        image : {
+        cardimage : {
+            type : Sequelize.STRING,
+            allowNull : false,
+        },
+        bannerimage : {
             type : Sequelize.STRING,
             allowNull : false,
         }
