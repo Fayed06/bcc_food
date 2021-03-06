@@ -31,9 +31,16 @@ module.exports = (sequelize, Sequelize) =>{
         city: {
             type : Sequelize.STRING,
             allowNull : false,
-        }
-
-
+        },
+        dollar : {
+            type : Sequelize.INTEGER,
+            allowNull: false
+        },
+        rate : {
+            type : Sequelize.INTEGER,
+            allowNull: false
+        },
+ 
     },{
     })
 
