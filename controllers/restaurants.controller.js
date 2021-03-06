@@ -1,6 +1,9 @@
 const db = require("../models");
 const restaurants = db.restaurants;
 const restoimg = db.restoimg;
+const food = db.food;
+const restocats = db.restocats;
+;
 
 // create restaurants
 function regRestaurants(req, res, next) {
@@ -17,30 +20,58 @@ function regRestaurants(req, res, next) {
 
 // findAll
 function findAll(req, res, next) {
+  const limit = req.query.limit ? parseInt(req.query.limit) : null
   restaurants.findAll({
       // where: {
       //   main: true
       // },
-      include: [
-        {
-          model: restoimg,
-          where: {
-            main: true
-          },
-          required: false
-        }
-      ]
+      include: [{
+        model: restoimg,
+        where: {
+          main: true
+        },
+        required: false
+      }, {
+        model: food
+      },{
+        model :restocats
+      } ],
+      limit
     })
     .then((data) => {
+      // console.log(data)
+      // console.log("==========================")
+      for (let i = 0; i < data.length; i++) {
+        let tot = 0
+        for (let j = 0; j < data[i].food.length; j++) {
+          // rata2 = total harga / banyak makanan
+          // total harga =+ harga makanan
+          tot += data[i].food[j].price
+        }
+        let rata = Math.round(tot / data[i].food.length)
+        let dollar = 0
+        if (rata < 25000) {
+          dollar = 1
+        } else if (rata < 75000) {
+          dollar = 2
+        } else if (rata < 150000) {
+          dollar = 3
+        } else if (rata > 150000) {
+          dollar = 4
+        } else {
+          dollar = 0
+        }
+        data[i].setDataValue("dollar", dollar)
+      }
       const response = {
         status: "success",
-        data: data,
+        data
       }
       res.send(response);
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error in findAll",
+        message: err.message,
       });
     });
 }
@@ -50,7 +81,11 @@ function findOne(req, res, next) {
   const id = req.params.id;
   restaurants.findByPk(id)
     .then((data) => {
-      res.send(data);
+      const response = {
+        status: "success",
+        data: data,
+      }
+      res.send(response);
     })
     .catch((err) => {
       res.status(500).send({

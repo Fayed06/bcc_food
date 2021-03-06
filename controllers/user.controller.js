@@ -68,7 +68,8 @@ function loginUser(req, res, next) {
             res.status(200).send({
               data,
               token
-            });
+            }
+            );
           } else {
             res.status(400).send({
               message: "Wrong Password",
@@ -98,7 +99,7 @@ function findOne(req, res, next) {
   User.findByPk(id)
     .then((data) => {
       if (data == null) {
-        res.status(500).send({
+        res.status(404).send({
           message: "Error User Not found",
         });
       }

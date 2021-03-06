@@ -4,9 +4,13 @@ const CatRestocat = db.CatRestocat;
   // findAll
   function findAll(req, res, next) {
     CatRestocat.findAll()
-      .then((data) => {
-        res.send(data);
-      })
+    .then((data) => {
+      const response = {
+        status: "success",
+        data: data,
+      }
+      res.send(response);
+    })
       .catch((err) => {
         res.status(500).send({
           message: "Error in findAll",

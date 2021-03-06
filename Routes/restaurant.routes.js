@@ -12,7 +12,4 @@ router.get('/all',  restaurantsController.findAll)
 // get one restaurants
 router.get('/:id', restaurantsController.findOne)
 
-
-
-
 module.exports = router

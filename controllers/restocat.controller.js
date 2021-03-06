@@ -22,8 +22,10 @@ function regCategories(req, res, next) {
 
 // findAll
 function findAll(req, res, next) {
+  const limit = req.query.limit ? parseInt(req.query.limit) : null
   Restocats.findAll({
-      include: restaurants
+      include: restaurants,
+      limit
     })
     .then((data) => {
       const response = {
@@ -42,13 +44,21 @@ function findAll(req, res, next) {
 // findOne
 function findOne(req, res, next) {
   const id = req.params.id;
-  Restocats.findByPk(id)
+  Restocats.findByPk(id, {
+      include: [{
+        model: restaurants,
+      }]
+    })
     .then((data) => {
-      res.send(data);
+      const response = {
+        status: "success",
+        data: data,
+      }
+      res.send(response);
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error in findOne",
+        message: err.message,
       });
     });
 }
