@@ -40,6 +40,10 @@ module.exports = (sequelize, Sequelize) =>{
             type : Sequelize.INTEGER,
             allowNull: false
         },
+        review : {
+            type : Sequelize.INTEGER,
+            allowNull: false 
+        },
  
     },{
     })
