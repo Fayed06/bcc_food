@@ -95,8 +95,31 @@ function findOne(req, res, next) {
     });
 }
 
+function destroy(req, res, next) {
+  const id = req.params.id;
+  let condition = {
+    id: id,
+  };
+
+  restaurants.destroy({
+      where: condition,
+    })
+    .then((num) => {
+      if (num != 1) {
+        return next(err)
+      }
+      res.status(200).send({
+        message: "Delete successful",
+      });
+    })
+    .catch((err) => {
+      return next(err)
+    });
+}
+
 module.exports = {
   regRestaurants,
   findAll,
   findOne,
+  destroy,
 }

@@ -12,4 +12,6 @@ router.get('/all',  restaurantsController.findAll)
 // get one restaurants
 router.get('/:id', restaurantsController.findOne)
 
+router.delete('/delete/:id', restaurantsController.destroy)
+
 module.exports = router
