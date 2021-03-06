@@ -68,8 +68,7 @@ function loginUser(req, res, next) {
             res.status(200).send({
               data,
               token
-            }
-            );
+            });
           } else {
             res.status(400).send({
               message: "Wrong Password",
@@ -102,7 +101,7 @@ function findOne(req, res, next) {
         res.status(404).send({
           message: "Error User Not found",
         });
-        
+
       }
       res.send(data);
     })
@@ -115,7 +114,7 @@ function findOne(req, res, next) {
 
 //nampilkan semua user
 function findAll(req, res, next) {
-  restaurants.findAll()
+  User.findAll()
     .then((data) => {
       res.send(data);
     })
@@ -125,9 +124,32 @@ function findAll(req, res, next) {
       });
     });
 }
+
+function destroy(req, res, next) {
+  const id = req.params.id;
+  let condition = {
+    id: id,
+  };
+
+  User.destroy({
+      where: condition,
+    })
+    .then((num) => {
+      if (num != 1) {
+        return next(err)
+      }
+      res.status(200).send({
+        message: "Delete successful",
+      });
+    })
+    .catch((err) => {
+      return next(err)
+    });
+}
 module.exports = {
   registerUser,
   loginUser,
   findOne,
   findAll,
+  destroy,
 };
