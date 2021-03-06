@@ -21,6 +21,7 @@ function regRestaurants(req, res, next) {
 // findAll
 function findAll(req, res, next) {
   const limit = req.query.limit ? parseInt(req.query.limit) : null
+  const offset = req.query.offset ? parseInt(req.query.offset) : null
   restaurants.findAll({
       // where: {
       //   main: true
@@ -36,7 +37,7 @@ function findAll(req, res, next) {
       },{
         model :restocats
       } ],
-      limit
+      limit, offset
     })
     .then((data) => {
       // console.log(data)
