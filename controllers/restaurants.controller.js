@@ -22,9 +22,6 @@ function findAll(req, res, next) {
   const limit = req.query.limit ? parseInt(req.query.limit) : null
   const offset = req.query.offset ? parseInt(req.query.offset) : null
   restaurants.findAll({
-      // where: {
-      //   main: true
-      // },
       include: [{
         model: restoimg,
         where: {
@@ -79,11 +76,22 @@ function findAll(req, res, next) {
 // findOne
 function findOne(req, res, next) {
   const id = req.params.id;
-  restaurants.findByPk(id)
+  restaurants.findByPk(id,{
+    include: [{
+      model: restoimg,
+      where: {
+        main: false
+      },
+      required: false
+    }, {
+      model: food
+    }, ],
+  })
     .then((data) => {
       const response = {
         status: "success",
-        data: data
+        message: "",
+        data
       }
       res.send(response);
     })
