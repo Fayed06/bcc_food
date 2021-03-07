@@ -2,8 +2,7 @@ const db = require("../models");
 const restaurants = db.restaurants;
 const restoimg = db.restoimg;
 const food = db.food;
-const restocats = db.restocats;
-;
+const restocats = db.restocats;;
 
 // create restaurants
 function regRestaurants(req, res, next) {
@@ -34,10 +33,9 @@ function findAll(req, res, next) {
         required: false
       }, {
         model: food
-      },{
-        model :restocats
-      } ],
-      limit, offset
+      }, ],
+      limit,
+      offset
     })
     .then((data) => {
       // // console.log(data)
@@ -66,6 +64,7 @@ function findAll(req, res, next) {
       // }
       const response = {
         status: "success",
+        message: "",
         data
       }
       res.send(response);
@@ -95,6 +94,7 @@ function findOne(req, res, next) {
     });
 }
 
+//delete
 function destroy(req, res, next) {
   const id = req.params.id;
   let condition = {

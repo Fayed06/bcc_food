@@ -19,7 +19,9 @@ function registerUser(req, res, next) {
       }
       const token = jwt.sign(payload, process.env.JWT_TOKEN)
       res.status(200).send({
-        ...data.dataValues,
+        status : "success",
+        message:"",
+        data,
         token
       });
     })
@@ -66,6 +68,8 @@ function loginUser(req, res, next) {
         bcrypt.compare(password, data.password).then((result) => {
           if (result == true) {
             res.status(200).send({
+              status: "success",
+              message:"",
               data,
               token
             });
@@ -97,13 +101,18 @@ function findOne(req, res, next) {
   const id = req.params.id;
   User.findByPk(id)
     .then((data) => {
+      const response = {
+        status: "success",
+        message:"",
+        data
+      }
       if (data == null) {
         res.status(404).send({
           message: "Error User Not found",
         });
 
       }
-      res.send(data);
+      res.send(response);
     })
     .catch((err) => {
       res.status(500).send({

@@ -7,6 +7,7 @@ const restoimg = db.restoimg;
     .then((data) => {
       const response = {
         status: "success",
+        message:"",
         data: data,
       }
       res.send(response);

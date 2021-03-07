@@ -1,6 +1,7 @@
 const db = require("../models");
 const Restocats = db.restocats;
 const restaurants = db.restaurants;
+const restoimg = db.restoimg;
 
 // create categories
 function regCategories(req, res, next) {
@@ -24,12 +25,16 @@ function regCategories(req, res, next) {
 function findAll(req, res, next) {
   const limit = req.query.limit ? parseInt(req.query.limit) : null
   Restocats.findAll({
-      include: restaurants,
+      include: [{
+        model : restaurants},
+
+      ],
       limit
     })
     .then((data) => {
       const response = {
         status: "success",
+        message:"",
         data: data,
       }
       res.send(response);
@@ -47,12 +52,14 @@ function findOne(req, res, next) {
   Restocats.findByPk(id, {
       include: [{
         model: restaurants,
+        
       }]
     })
     .then((data) => {
       const response = {
         status: "success",
-        data: data,
+        message:"",
+        data
       }
       res.send(response);
     })
