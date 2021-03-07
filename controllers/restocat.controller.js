@@ -52,6 +52,9 @@ function findOne(req, res, next) {
   Restocats.findByPk(id, {
       include: [{
         model: restaurants,
+        include: [{
+          model : restoimg,
+        }]
         
       }]
     })
