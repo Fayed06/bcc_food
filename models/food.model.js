@@ -19,6 +19,10 @@ module.exports = (sequelize, Sequelize, restaurants) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    image : {
+      type: Sequelize.STRING,
+      allowNull: false,
+    }
 
 
   }, {})

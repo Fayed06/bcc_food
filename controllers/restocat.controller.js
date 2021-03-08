@@ -26,15 +26,17 @@ function findAll(req, res, next) {
   const limit = req.query.limit ? parseInt(req.query.limit) : null
   Restocats.findAll({
       include: [{
-        model : restaurants},
-
-      ],
+        model: restaurants,
+        // include: [{
+        //   model: restoimg,
+        // }]
+      }],
       limit
     })
     .then((data) => {
       const response = {
         status: "success",
-        message:"",
+        message: "",
         data: data,
       }
       res.send(response);
@@ -53,15 +55,15 @@ function findOne(req, res, next) {
       include: [{
         model: restaurants,
         include: [{
-          model : restoimg,
+          model: restoimg,
         }]
-        
+
       }]
     })
     .then((data) => {
       const response = {
         status: "success",
-        message:"",
+        message: "",
         data
       }
       res.send(response);
