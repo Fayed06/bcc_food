@@ -50,7 +50,7 @@ booking.belongsTo(user)
 booking.hasOne(review)
 review.belongsTo(booking)
 
-// sequelize.sync({alter: true, force : true})
+sequelize.sync({alter: true})
 module.exports = {
     Sequelize,
     sequelize,
