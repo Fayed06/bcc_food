@@ -2,7 +2,7 @@ const db = require("../models");
 const restaurants = db.restaurants;
 const restoimg = db.restoimg;
 const food = db.food;
-const restocats = db.restocats;;
+const restocats = db.restocats;
 
 // create restaurants
 function regRestaurants(req, res, next) {
@@ -37,28 +37,26 @@ function findAll(req, res, next) {
     .then((data) => {
       // // console.log(data)
       // // console.log("==========================")
-      // for (let i = 0; i < data.length; i++) {
-      //   let tot = 0
-      //   for (let j = 0; j < data[i].food.length; j++) {
-      //     // rata2 = total harga / banyak makanan
-      //     // total harga =+ harga makanan
-      //     tot += data[i].food[j].price
-      //   }
-      //   let rata = Math.round(tot / data[i].food.length)
-      //   let dollar = 0
-      //   if (rata < 25000) {
-      //     dollar = 1
-      //   } else if (rata < 75000) {
-      //     dollar = 2
-      //   } else if (rata < 150000) {
-      //     dollar = 3
-      //   } else if (rata > 150000) {
-      //     dollar = 4
-      //   } else {
-      //     dollar = 0
-      //   }
-      //   data[i].setDataValue("dollar", dollar)
-      // }
+      for (let i = 0; i < data.length; i++) {
+        let tot = 0
+        for (let j = 0; j < data[i].food.length; j++) {
+          tot += data[i].food[j].price
+        }
+        let rata = Math.round(tot / data[i].food.length)
+        let dollar = 0
+        if (rata < 25000) {
+          dollar = 1
+        } else if (rata < 75000) {
+          dollar = 2
+        } else if (rata < 150000) {
+          dollar = 3
+        } else if (rata > 150000) {
+          dollar = 4
+        } else {
+          dollar = 0
+        }
+        data[i].setDataValue("dollar", dollar)
+      }
       const response = {
         status: "success",
         message: "",
