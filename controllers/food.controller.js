@@ -27,7 +27,6 @@ function findAll(req, res, next) {
         model: restaurants,
 
       }],
-      // // limit
     })
     .then((data) => {
       const response = {
@@ -44,10 +43,40 @@ function findAll(req, res, next) {
     });
 }
 
-// findOne
-function findOne(req, res, next) {
+// findOne Makanan
+function GetFood(req, res, next) {
   const id = req.params.id;
-  food.findAll({where:{restaurantId: id}})
+  food.findAll({
+      where: {
+        restaurantId: id,
+        tipe: "Makanan"
+      }
+    })
+
+    .then((data) => {
+      const response = {
+        status: "success",
+        message: "",
+        data
+      }
+      res.send(response);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error in findOne",
+      });
+    });
+}
+
+// findOne Minuman
+function GetDrink(req, res, next) {
+  const id = req.params.id;
+  food.findAll({
+      where: {
+        restaurantId: id,
+        tipe: "Minuman"
+      }
+    })
 
     .then((data) => {
       const response = {
@@ -68,5 +97,6 @@ function findOne(req, res, next) {
 module.exports = {
   reg,
   findAll,
-  findOne,
+  GetDrink,
+  GetFood,
 }

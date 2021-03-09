@@ -9,8 +9,11 @@ router.post('/register',foodController.reg)
 // // get all food
 router.get('/all',  foodController.findAll)
 
-// // get one restaurants
-router.get('/:id', foodController.findOne)
+// // get all Minuman
+router.get('/drink/:id', foodController.GetDrink)
+
+// get all Makanan
+router.get('/foods/:id', foodController.GetFood)
 
 
 module.exports = router
