@@ -27,9 +27,6 @@ function findAll(req, res, next) {
   Restocats.findAll({
       include: [{
         model: restaurants,
-        // include: [{
-        //   model: restoimg,
-        // }]
       }],
       limit
     })

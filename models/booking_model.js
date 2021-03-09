@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, restaurants, bookingpacket, user) => {
+module.exports = (sequelize, Sequelize, restaurants, bookingpacket, user,booking_place) => {
   const booking = sequelize.define("booking", {
     restaurantId: {
       type: Sequelize.INTEGER,
@@ -24,6 +24,9 @@ module.exports = (sequelize, Sequelize, restaurants, bookingpacket, user) => {
     number_of_seat: {
       type: Sequelize.INTEGER,
       allowNull: false,
+    },
+    place: {
+      type: Sequelize.ENUM('indoor','outdoor')
     },
     // total_price: {
     //   type: Sequelize.INTEGER,

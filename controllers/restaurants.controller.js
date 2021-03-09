@@ -35,8 +35,6 @@ function findAll(req, res, next) {
       offset
     })
     .then((data) => {
-      // // console.log(data)
-      // // console.log("==========================")
       for (let i = 0; i < data.length; i++) {
         let tot = 0
         for (let j = 0; j < data[i].food.length; j++) {

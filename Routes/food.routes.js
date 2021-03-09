@@ -3,15 +3,14 @@ const router = express.Router()
 const foodController = require('../controllers/food.controller')
 
 
-// register restaurants
+// register food
 router.post('/register',foodController.reg)
 
-// // get all restaurants
-// router.get('/all',  restaurantsController.findAll)
+// // get all food
+router.get('/all',  foodController.findAll)
 
 // // get one restaurants
-// router.get('/:id', restaurantsController.findOne)
+router.get('/:id', foodController.findOne)
 
-// router.delete('/delete/:id', restaurantsController.destroy)
 
 module.exports = router
