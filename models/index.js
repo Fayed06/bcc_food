@@ -44,14 +44,12 @@ bookingpacket.hasMany(booking)
 booking.belongsTo(bookingpacket)
 user.hasMany(booking)
 booking.belongsTo(user)
-booking.hasOne(bookingfood)
-bookingfood.belongsTo(booking)
-food.hasMany(bookingfood)
-bookingfood.belongsTo(food)
+booking.belongsToMany(food,{through :bookingfood})
+food.belongsToMany(booking,{through :bookingfood})
 booking.hasOne(review)
 review.belongsTo(booking)
 
-sequelize.sync({alter: true})
+// sequelize.sync({alter: true})
 module.exports = {
     Sequelize,
     sequelize,
