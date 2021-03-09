@@ -7,7 +7,7 @@ const sequelize = new Sequelize(env.DB_NAME, env.DB_USER, env.DB_PASS, {
     dialect: env.DB_DIALECT,
 
     pool: {
-        max: 3,
+        max: 5,
         min: 0,
         idle: 3000,
         acquire: 10000
@@ -25,8 +25,9 @@ const foodCategory = require("./food_categories.model")(sequelize, Sequelize)
 const foodhascategory = require("./foodhascategory.model")(sequelize, Sequelize, restaurants, foodCategory)
 const bookingpacket = require("./booking_packet.model")(sequelize, Sequelize)
 const booking = require("./booking_model")(sequelize, Sequelize, restaurants, bookingpacket, user)
-// const bookingfood = require("./booking_food.model")(sequelize, Sequelize, booking, food)
+const bookingfood = require("./booking_food.model")(sequelize, Sequelize, booking, food)
 const review = require("./review.model")(sequelize, Sequelize, booking)
+const suggest = require("./suggest.model")(sequelize, Sequelize)
 
 //define relationship
 restaurants.belongsToMany(restocats,{through :'CatRestocat'})
@@ -43,14 +44,14 @@ bookingpacket.hasMany(booking)
 booking.belongsTo(bookingpacket)
 user.hasMany(booking)
 booking.belongsTo(user)
-// booking.hasOne(bookingfood)
-// bookingfood.belongsTo(booking)
-// food.hasMany(bookingfood)
-// bookingfood.belongsTo(food)
+booking.hasOne(bookingfood)
+bookingfood.belongsTo(booking)
+food.hasMany(bookingfood)
+bookingfood.belongsTo(food)
 booking.hasOne(review)
 review.belongsTo(booking)
 
-// sequelize.sync({alter: true})
+sequelize.sync({alter: true})
 module.exports = {
     Sequelize,
     sequelize,
@@ -66,6 +67,7 @@ module.exports = {
     foodhascategory,
     bookingpacket,
     booking,
-    // bookingfood,
+    bookingfood,
     review,
+    suggest,
 }

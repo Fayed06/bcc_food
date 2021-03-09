@@ -17,6 +17,7 @@ const restaurantRoute= require('./Routes/restaurant.routes')
 const catrestocatRoute= require('./Routes/catrestocat.routes')
 const restoimgRoute= require('./Routes/restoimg.routes')
 const foodRoute= require('./Routes/food.routes')
+const suggestRoute= require('./Routes/suggest.routes')
 
 //bodyparser
 app.use(express.json())
@@ -29,6 +30,7 @@ app.use('/restaurants', restaurantRoute)
 app.use('/catrestocat', catrestocatRoute)
 app.use('/restoimg', restoimgRoute)
 app.use('/food', foodRoute)
+app.use('/suggest', suggestRoute)
 
 app.use(errorHandler)
 
