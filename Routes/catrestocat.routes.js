@@ -4,6 +4,6 @@ const catrestocatController = require('../controllers/catrestocat.controller')
 
 
 // get all Categories
-router.get('/all',  catrestocatController.findAll)
+router.get('/all', catrestocatController.findAll)
 
 module.exports = router

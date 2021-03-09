@@ -4,6 +4,6 @@ const suggestController = require('../controllers/suggest.controller')
 
 
 // register restaurants
-router.post('/register',suggestController.reg)
+router.post('/register', suggestController.reg)
 
 module.exports = router

@@ -8,20 +8,22 @@ const cors = require('cors')
 const errorHandler = require("./utils/errorHandler")
 
 
-db.sequelize.sync({ })
+db.sequelize.sync({})
 
 //Routes
-const userRoute= require('./Routes/user.routes')
-const restocatRoute= require('./Routes/restocat.routes')
-const restaurantRoute= require('./Routes/restaurant.routes')
-const catrestocatRoute= require('./Routes/catrestocat.routes')
-const restoimgRoute= require('./Routes/restoimg.routes')
-const foodRoute= require('./Routes/food.routes')
-const suggestRoute= require('./Routes/suggest.routes')
+const userRoute = require('./Routes/user.routes')
+const restocatRoute = require('./Routes/restocat.routes')
+const restaurantRoute = require('./Routes/restaurant.routes')
+const catrestocatRoute = require('./Routes/catrestocat.routes')
+const restoimgRoute = require('./Routes/restoimg.routes')
+const foodRoute = require('./Routes/food.routes')
+const suggestRoute = require('./Routes/suggest.routes')
 
 //bodyparser
 app.use(express.json())
-app.use(express.urlencoded( { extended: false}))
+app.use(express.urlencoded({
+    extended: false
+}))
 
 app.use(cors())
 app.use('/user', userRoute)
@@ -34,9 +36,9 @@ app.use('/suggest', suggestRoute)
 
 app.use(errorHandler)
 
-app.use('/', (req, res)=> {
+app.use('/', (req, res) => {
     res.send({
-        message:"app lancar"
+        message: "app lancar"
     })
 })
 

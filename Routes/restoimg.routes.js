@@ -3,7 +3,7 @@ const router = express.Router()
 const restoimgController = require('../controllers/restoimg.controller')
 
 // get all Categories
-router.get('/all',  restoimgController.findAll)
+router.get('/all', restoimgController.findAll)
 
 
 module.exports = router

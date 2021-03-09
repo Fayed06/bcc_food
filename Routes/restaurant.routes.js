@@ -4,10 +4,10 @@ const restaurantsController = require('../controllers/restaurants.controller')
 
 
 // register restaurants
-router.post('/register',restaurantsController.regRestaurants)
+router.post('/register', restaurantsController.regRestaurants)
 
 // get all restaurants
-router.get('/all',  restaurantsController.findAll)
+router.get('/all', restaurantsController.findAll)
 
 // get one restaurants
 router.get('/:id', restaurantsController.findOne)

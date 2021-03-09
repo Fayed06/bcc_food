@@ -19,10 +19,10 @@ function registerUser(req, res, next) {
       }
       const token = jwt.sign(payload, process.env.JWT_TOKEN)
       res.status(200).send({
-        status : "success",
-        message:"Registrasi berhasil",
-        data : {
-          token:token
+        status: "success",
+        message: "Registrasi berhasil",
+        data: {
+          token: token
         }
       });
     })
@@ -70,9 +70,9 @@ function loginUser(req, res, next) {
           if (result == true) {
             res.status(200).send({
               status: "success",
-              message:"Login Berhasil",
-              data : {
-                token:token
+              message: "Login Berhasil",
+              data: {
+                token: token
               }
             });
           } else {
@@ -105,7 +105,7 @@ function findOne(req, res, next) {
     .then((data) => {
       const response = {
         status: "success",
-        message:"",
+        message: "",
         data
       }
       if (data == null) {

@@ -53,8 +53,8 @@ function findOne(req, res, next) {
         model: restaurants,
         include: [{
           model: restoimg,
-          where : {
-            main : true
+          where: {
+            main: true
           },
           required: false
         }]

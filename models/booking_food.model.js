@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize, booking, food) => {
     quantity: {
       type: Sequelize.INTEGER,
       allowNull: false,
-    },    
+    },
     sub_price: {
       type: Sequelize.INTEGER,
       allowNull: false,

@@ -72,17 +72,17 @@ function findAll(req, res, next) {
 // findOne
 function findOne(req, res, next) {
   const id = req.params.id;
-  restaurants.findByPk(id,{
-    include: [{
-      model: restoimg,
-      where: {
-        main: false
-      },
-      required: false
-    }, {
-      model: food
-    }, ],
-  })
+  restaurants.findByPk(id, {
+      include: [{
+        model: restoimg,
+        where: {
+          main: false
+        },
+        required: false
+      }, {
+        model: food
+      }, ],
+    })
     .then((data) => {
       const response = {
         status: "success",

@@ -4,10 +4,10 @@ const foodController = require('../controllers/food.controller')
 
 
 // register food
-router.post('/register',foodController.reg)
+router.post('/register', foodController.reg)
 
 // // get all food
-router.get('/all',  foodController.findAll)
+router.get('/all', foodController.findAll)
 
 // // get all Minuman
 router.get('/drink/:id', foodController.GetDrink)

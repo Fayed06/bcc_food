@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize, restaurants) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    tipe : {
+    tipe: {
       type: Sequelize.STRING,
       allowNull: false,
     },
@@ -19,7 +19,7 @@ module.exports = (sequelize, Sequelize, restaurants) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    image : {
+    image: {
       type: Sequelize.STRING,
       allowNull: false,
     }
