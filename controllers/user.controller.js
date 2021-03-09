@@ -20,9 +20,10 @@ function registerUser(req, res, next) {
       const token = jwt.sign(payload, process.env.JWT_TOKEN)
       res.status(200).send({
         status : "success",
-        message:"",
-        data,
-        token
+        message:"Registrasi berhasil",
+        data : {
+          token:token
+        }
       });
     })
     .catch((err) => {
@@ -69,9 +70,10 @@ function loginUser(req, res, next) {
           if (result == true) {
             res.status(200).send({
               status: "success",
-              message:"",
-              data,
-              token
+              message:"Login Berhasil",
+              data : {
+                token:token
+              }
             });
           } else {
             res.status(400).send({
