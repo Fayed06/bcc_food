@@ -56,7 +56,7 @@ function GetFood(req, res, next) {
     .then((data) => {
       const response = {
         status: "success",
-        message: "",
+        message: "Berhasil mengambil data Makanan",
         data
       }
       res.send(response);
@@ -81,7 +81,7 @@ function GetDrink(req, res, next) {
     .then((data) => {
       const response = {
         status: "success",
-        message: "",
+        message: "Berhasil Mengambil data Minuman",
         data
       }
       res.send(response);

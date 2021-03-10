@@ -57,7 +57,7 @@ function findAll(req, res, next) {
       }
       const response = {
         status: "success",
-        message: "",
+        message: "berhasi mengambil data semua restaurant",
         data
       }
       res.send(response);
@@ -86,7 +86,7 @@ function findOne(req, res, next) {
     .then((data) => {
       const response = {
         status: "success",
-        message: "",
+        message: "Berhasil mengambil data restaurant",
         data
       }
       res.send(response);

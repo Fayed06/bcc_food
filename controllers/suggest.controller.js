@@ -7,7 +7,7 @@ function reg(req, res, next) {
     .then((data) => {
       const response = {
         status: "success",
-        message: "",
+        message: "berhasil memasukan kritik dan saran",
         data
       }
       res.send(response);
