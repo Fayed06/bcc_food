@@ -98,36 +98,18 @@ function loginUser(req, res, next) {
       return next(err)
     });
 }
-//cari satu user
-function findOne(req, res, next) {
-  const id = req.params.id;
-  User.findByPk(id)
-    .then((data) => {
-      const response = {
-        status: "success",
-        message: "",
-        data
-      }
-      if (data == null) {
-        res.status(404).send({
-          message: "Error User Not found",
-        });
 
-      }
-      res.send(response);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error in findOne",
-      });
-    });
-}
 
 //nampilkan semua user
 function findAll(req, res, next) {
   User.findAll()
     .then((data) => {
-      res.send(data);
+      const response = {
+        status: "success",
+        message: "",
+        data: data,
+      }
+      res.send(response);
     })
     .catch((err) => {
       res.status(500).send({
@@ -157,10 +139,63 @@ function destroy(req, res, next) {
       return next(err)
     });
 }
+
+function profile(req, res) {
+  try {
+    jwt.verify(req.token, process.env.JWT_TOKEN, (err, AuthData) => {
+      if (err) {
+        res.sendStatus(403)
+      } else {
+        const response = {
+          status: "success",
+          message: "",
+          data: AuthData,
+        }
+        res.send(response);
+      }
+    })
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+//verify token
+function verifyToken(req, res, next) {
+  try {
+    const bearerHeader = req.headers['authorization'];
+    if (typeof bearerHeader !== 'undefined') {
+      const bearer = bearerHeader.split(' ');
+      const bearerToken = bearer[1];
+      req.token = bearerToken;
+      next();
+    } else {
+      res.sendStatus(403);
+    }
+  } catch (e) {
+    console.log(e)
+  }
+    
+}
+
+// function authenticateToken(req, res, next) {
+//   const authHeader = req.headers['authorization']
+//   const token = authHeader && authHeader.split(' ')[1]
+//   if (token == null) return res.sendStatus(401)
+
+//   jwt.verify(token, process.env.JWT_TOKEN, (err, user) => {
+//     if (err) return res.sendStatus(403)
+//     req.user = user
+//     next()
+//   })
+// }
+
 module.exports = {
   registerUser,
   loginUser,
-  findOne,
+  // findOne,
   findAll,
   destroy,
+  profile,
+  verifyToken,
+  // authenticateToken,
 };
