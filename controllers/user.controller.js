@@ -20,7 +20,7 @@ function registerUser(req, res, next) {
         phone: data.phone
       }
       const token = jwt.sign(payload, process.env.JWT_TOKEN)
-      res.status(200).send({
+      res.status(201).send({
         status: "success",
         message: "Registrasi berhasil",
         data: {
@@ -103,7 +103,6 @@ function loginUser(req, res, next) {
     });
 }
 
-
 //nampilkan semua user
 function findAll(req, res, next) {
   User.findAll()
@@ -163,43 +162,12 @@ function profile(req, res) {
   }
 }
 
-//verify token
-function verifyToken(req, res, next) {
-  try {
-    const bearerHeader = req.headers['authorization'];
-    if (typeof bearerHeader !== 'undefined') {
-      const bearer = bearerHeader.split(' ');
-      const bearerToken = bearer[1];
-      req.token = bearerToken;
-      next();
-    } else {
-      res.sendStatus(403);
-    }
-  } catch (e) {
-    console.log(e)
-  }
-    
-}
-
-// function authenticateToken(req, res, next) {
-//   const authHeader = req.headers['authorization']
-//   const token = authHeader && authHeader.split(' ')[1]
-//   if (token == null) return res.sendStatus(401)
-
-//   jwt.verify(token, process.env.JWT_TOKEN, (err, user) => {
-//     if (err) return res.sendStatus(403)
-//     req.user = user
-//     next()
-//   })
-// }
 
 module.exports = {
   registerUser,
   loginUser,
-  // findOne,
   findAll,
   destroy,
   profile,
-  verifyToken,
-  // authenticateToken,
+
 };

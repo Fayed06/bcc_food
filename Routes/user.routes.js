@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/user.controller')
-const {verifyToken}= require('../controllers/user.controller')
+const jwtmiddlewares= require('../middlewares/jwtAuth')
 
 
 // register user
@@ -17,9 +17,8 @@ router.get('/all', userController.findAll)
 router.delete('/delete/:id', userController.destroy)
 
 //get user profile
-router.get('/profile', verifyToken, userController.profile )
+router.get('/profile', jwtmiddlewares, userController.profile )
 
-//getone
-// router.get('/:id', userController.findOne)
+
 
 module.exports = router

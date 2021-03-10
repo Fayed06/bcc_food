@@ -10,7 +10,7 @@ function reg(req, res, next) {
         message: "berhasil memasukan kritik dan saran",
         data
       }
-      res.send(response);
+      res.status(201).send(response);
     })
     .catch((err) => {
       res.status(500).send({
