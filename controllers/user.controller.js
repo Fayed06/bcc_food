@@ -15,7 +15,9 @@ function registerUser(req, res, next) {
       const payload = {
         id: data.id,
         name: data.name,
-        image: data.image
+        image: data.image,
+        email: data.email,
+        phone: data.phone
       }
       const token = jwt.sign(payload, process.env.JWT_TOKEN)
       res.status(200).send({
@@ -63,7 +65,9 @@ function loginUser(req, res, next) {
         const payload = {
           id: data.id,
           name: data.name,
-          image: data.image
+          image: data.image,
+          email: data.email,
+          phone: data.phone
         }
         const token = jwt.sign(payload, process.env.JWT_TOKEN)
         bcrypt.compare(password, data.password).then((result) => {
@@ -148,7 +152,7 @@ function profile(req, res) {
       } else {
         const response = {
           status: "success",
-          message: "",
+          message: "Data berhasil didapatkan",
           data: AuthData,
         }
         res.send(response);
