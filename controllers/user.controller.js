@@ -4,7 +4,6 @@ const _ = require('lodash');
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
-
 // create User
 function registerUser(req, res, next) {
   User.create({
@@ -170,4 +169,4 @@ module.exports = {
   destroy,
   profile,
 
-};
+}

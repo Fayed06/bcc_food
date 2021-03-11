@@ -2,7 +2,6 @@ const db = require("../models");
 const restaurants = db.restaurants;
 const restoimg = db.restoimg;
 const food = db.food;
-const restocats = db.restocats;
 
 // create restaurants
 function regRestaurants(req, res, next) {
