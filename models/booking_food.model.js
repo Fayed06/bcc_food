@@ -22,11 +22,6 @@ module.exports = (sequelize, Sequelize, booking, food) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    // total_price: {
-    //   type: Sequelize.INTEGER,
-    //   allowNull: false,
-    // },
-
 
   }, {})
   return bookingfood
