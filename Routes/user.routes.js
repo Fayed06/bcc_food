@@ -4,7 +4,6 @@ const userController = require('../controllers/user.controller')
 const jwtmiddlewares= require('../middlewares/jwtAuth')
 const joiMiddleware = require("../middlewares/joiValidator")
 
-
 // register user
 router.post('/register', joiMiddleware,userController.registerUser)
 

@@ -7,4 +7,5 @@ const joiMiddleware = require("../middlewares/joiValidator")
 // register routes
 router.post('/reg', suggestController.reg)
 
+
 module.exports = router
