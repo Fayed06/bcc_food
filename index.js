@@ -4,9 +4,6 @@ const app = express();
 const db = require('./models')
 const cors = require('cors')
 
-const errorHandler = require("./utils/errorHandler")
-
-
 db.sequelize.sync({})
 
 //Routes
@@ -16,13 +13,12 @@ const restaurantRoute = require('./Routes/restaurant.routes')
 const catrestocatRoute = require('./Routes/catrestocat.routes')
 const restoimgRoute = require('./Routes/restoimg.routes')
 const foodRoute = require('./Routes/food.routes')
+const bookRoute = require('./Routes/booking.routes')
 const suggestRoute = require('./Routes/suggest.routes')
 
 //bodyparser
 app.use(express.json())
-app.use(express.urlencoded({
-    extended: false
-}))
+app.use(express.urlencoded({extended: false}))
 
 app.use(cors())
 app.use('/user', userRoute)
@@ -31,9 +27,9 @@ app.use('/restaurants', restaurantRoute)
 app.use('/catrestocat', catrestocatRoute)
 app.use('/restoimg', restoimgRoute)
 app.use('/food', foodRoute)
+app.use('/booking', bookRoute)
 app.use('/suggest', suggestRoute)
 
-app.use(errorHandler)
 
 app.use('/', (req, res) => {
     res.send({
