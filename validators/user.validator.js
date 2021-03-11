@@ -1,7 +1,7 @@
 const joi = require('joi');
 
-const name = joi.string().regex(/^[a-z A-Z]+$/)
-const phone = joi.string().regex(/^(^\+62|62|^08)(\d{3,4}-?){2}\d{3,4}$/)
+const name = joi.string().min(5).regex(/^[a-z A-Z]+$/)
+const phone = joi.string().min(11)
 const password = joi.string().min(8).strict()
 const email = joi.string().email();
 

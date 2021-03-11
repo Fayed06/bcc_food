@@ -26,10 +26,7 @@ function joiValidator(req, res, next) {
                 const JoiError = {
                     success : false,
                     error : {
-                        details : _.map(error.errors,({message , type})=>({
-                            message,
-                            type
-                        }))
+                        message: error.message,
                     }
                 }
 
