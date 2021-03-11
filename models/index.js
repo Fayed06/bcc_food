@@ -24,41 +24,27 @@ const restoimg = require("./resto.img.model")(sequelize, Sequelize, restaurants)
 const food = require("./food.model")(sequelize, Sequelize, restaurants)
 const foodCategory = require("./food_categories.model")(sequelize, Sequelize)
 const foodhascategory = require("./foodhascategory.model")(sequelize, Sequelize, restaurants, foodCategory)
-const bookingpacket = require("./booking_packet.model")(sequelize, Sequelize)
-const booking = require("./booking_model")(sequelize, Sequelize, restaurants, bookingpacket, user)
+// const bookingpacket = require("./booking_packet.model")(sequelize, Sequelize)
+const booking = require("./booking_model")(sequelize, Sequelize, restaurants, user)
 const bookingfood = require("./booking_food.model")(sequelize, Sequelize, booking, food)
 const review = require("./review.model")(sequelize, Sequelize, booking)
 const suggest = require("./suggest.model")(sequelize, Sequelize)
 
 //define relationship
-restaurants.belongsToMany(restocats, {
-    through: 'CatRestocat'
-})
-restocats.belongsToMany(restaurants, {
-    through: 'CatRestocat'
-})
+restaurants.belongsToMany(restocats, {through: 'CatRestocat'})
+restocats.belongsToMany(restaurants, {through: 'CatRestocat'})
 restaurants.hasMany(restoimg)
 restoimg.belongsTo(restaurants)
 restaurants.hasMany(food)
 food.belongsTo(restaurants)
-food.belongsToMany(foodCategory, {
-    through: 'food_has_categories'
-})
-foodCategory.belongsToMany(food, {
-    through: 'food_has_categories'
-})
+food.belongsToMany(foodCategory, {through: 'food_has_categories'})
+foodCategory.belongsToMany(food, {through: 'food_has_categories'})
 restaurants.hasMany(booking)
 booking.belongsTo(restaurants)
-bookingpacket.hasMany(booking)
-booking.belongsTo(bookingpacket)
 user.hasMany(booking)
 booking.belongsTo(user)
-booking.belongsToMany(food, {
-    through: bookingfood
-})
-food.belongsToMany(booking, {
-    through: bookingfood
-})
+booking.belongsToMany(food, {through: bookingfood})
+food.belongsToMany(booking, {through: bookingfood})
 booking.hasOne(review)
 review.belongsTo(booking)
 
@@ -76,7 +62,7 @@ module.exports = {
     food,
     foodCategory,
     foodhascategory,
-    bookingpacket,
+    // bookingpacket,
     booking,
     bookingfood,
     review,

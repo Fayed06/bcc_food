@@ -32,10 +32,6 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        // dollar : {
-        //     type : Sequelize.INTEGER,
-        //     allowNull: false
-        // },
         rate: {
             type: Sequelize.INTEGER,
             allowNull: false
@@ -44,7 +40,22 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false
         },
-
+        open: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        phone: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        email: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        web: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
     }, {})
 
     return restaurants
