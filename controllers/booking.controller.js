@@ -1,38 +1,62 @@
 const db = require("../models");
 const booking = db.booking;
+const food = db.food;
+const bookingfood = db.bookingfood
 const jwt = require("jsonwebtoken");
 
 // create booking
 function regbooking(req, res, next) {
   try {
-    jwt.verify(req.token, process.env.JWT_TOKEN, (err, AuthData) => {
+    jwt.verify(req.token, process.env.JWT_TOKEN, async (err, AuthData) => {
       if (err) {
         res.sendStatus(403)
       } else {
-        const hasil = {
-          AuthData
+        const bookingData = {
+          ...req.body,
+          userId: AuthData.id
+        }
+        if (req.body.foods) delete bookingData["foods"];
+
+        let bookingCreated = await booking.create(bookingData)
+
+        const {
+          foods
+        } = req.body
+        let bookingPrice = 0
+
+        if (foods) {
+          for (let i = 0; i < foods.length; i++) {
+            const foodData = await food.findByPk(foods[i].foodId)
+
+            bookingPrice = bookingPrice + (foodData.price * foods[i].quantity)
+
+            const bookingFoodDdata = {
+              bookingId: bookingCreated.id,
+              foodId: foodData.id,
+              quantity: foods[i].quantity,
+              sub_price: foodData.price * foods[i].quantity
+            }
+
+            await bookingfood.create(bookingFoodDdata)
+          }
+
+          await booking.update({
+            total_price: bookingPrice
+          }, {
+            where: {
+              id: bookingCreated.id
+            }
+          })
+
+          bookingCreated = await booking.findByPk(bookingCreated.id)
         }
 
-        booking.create({
-            ...req.body,
-            userId: AuthData.id
-          })
-          .then((data) => {
-            if (data.total_price == null) {
-              data.total_price = 0
-            }
-            const response = {
-              status: "success",
-              message: "berhasi menambahkan booking",
-              data
-            }
-            res.status(201).send(response);
-          })
-          .catch((err) => {
-            res.status(500).send({
-              message: err,
-            });
-          });
+        const response = {
+          status: "success",
+          message: "berhasil menambahkan booking",
+          data : bookingCreated
+        }
+        res.status(201).send(response);
       }
     })
 
@@ -53,34 +77,33 @@ function findAll(req, res, next) {
           AuthData,
         }
         booking.findAll({
-          where: {
-            userId: id,
-          },
-          total_price: 0
-        })
-        .then((data) => {
-          const response = {
-            status: "success",
-            message: "",
-            data,
-          }
-          res.send(response);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message: err.message,
+            where: {
+              userId: id,
+            },
+          })
+          .then((data) => {
+            const response = {
+              status: "success",
+              message: "",
+              data,
+            }
+            res.send(response);
+          })
+          .catch((err) => {
+            res.status(500).send({
+              message: err.message,
+            });
           });
-        });
       }
     })
   } catch (e) {
     console.log(e)
   }
-  
+
 }
 
 
-  module.exports = {
-    regbooking,
-    findAll,
-  }
+module.exports = {
+  regbooking,
+  findAll,
+}
