@@ -2,8 +2,9 @@ const db = require("../models");
 const restaurants = db.restaurants;
 const restoimg = db.restoimg;
 const food = db.food;
+const foodCategory =db.foodCategory
 
-const { Op } = require("sequelize");
+
 
 // create restaurants
 function regRestaurants(req, res, next) {
@@ -22,6 +23,24 @@ function regRestaurants(req, res, next) {
 function findAll(req, res, next) {
   const limit = req.query.limit ? parseInt(req.query.limit) : null
   const offset = req.query.offset ? parseInt(req.query.offset) : null
+  const rate = req.query.rate ? parseInt(req.query.rate) : null
+  const category = req.query.category ? parseInt(req.query.category) : null
+  const dollar = req.query.dollar ? parseInt(req.query.dollar) : null
+
+  let whereRestaurants = {}
+  if (rate) {
+    whereRestaurants = {
+      rate
+    }
+  }
+
+  let whereCategory = {}
+  if (category) {
+    whereCategory = {
+      id: category
+    }
+  }
+
   restaurants.findAll({
       include: [{
         model: restoimg,
@@ -30,10 +49,20 @@ function findAll(req, res, next) {
         },
         required: false
       }, {
-        model: food 
-      }, ],
+        model: food,
+        include: [
+          {
+            model: foodCategory,
+            where: whereCategory,
+            required: category ? true : false
+          }
+        ],
+        required: true
+      }],
       limit,
       offset,
+      where: whereRestaurants,
+      required: rate ? true : false
     })
     .then((data) => {
       for (let i = 0; i < data.length; i++) {
@@ -56,6 +85,17 @@ function findAll(req, res, next) {
         }
         data[i].setDataValue("dollar", dollar)
       }
+
+      data = data.filter((val) => {
+        const dollarValue = val.getDataValue("dollar")
+        if(dollar) {
+          if (dollarValue == dollar) return true
+          else return false
+        } else {
+          return true
+        }
+      })
+      
       const response = {
         status: "success",
         message: "berhasi mengambil data semua restaurant",
