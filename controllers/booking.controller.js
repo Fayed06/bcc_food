@@ -77,6 +77,11 @@ function findAll(req, res, next) {
           AuthData,
         }
         booking.findAll({
+          include:[{
+            model : food
+          },{
+            model :bookingfood
+          }],
             where: {
               userId: id,
             },
