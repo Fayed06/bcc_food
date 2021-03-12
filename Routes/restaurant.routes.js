@@ -13,9 +13,9 @@ router.get('/all', restaurantsController.findAll)
 
 router.get('/all/cat', foodcatcontroller.findAll)
 
-router.post('/:id/create/review', jwtmiddlewares, reviewController.reg)
+router.post('/create/review', jwtmiddlewares, reviewController.reg)
 
-router.get('/:id/reviews', jwtmiddlewares, reviewController.findAll)
+router.get('/reviews', jwtmiddlewares, reviewController.findAll)
 
 // get one restaurants
 router.get('/:id', restaurantsController.findOne)
