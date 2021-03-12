@@ -20,19 +20,11 @@ function reg(req, res, next) {
 }
 
 function findAll(req, res, next) {
-  suggest.findAll({
-    include:[{
-      model : booking,
-      include: [{
-        model : user,
-      }]
-  
-    }]
-  })
+  suggest.findAll()
     .then((data) => {
       const response = {
         status: "success",
-        message: "Berhasil menampilkan semua review",
+        message: "Berhasil menampilkan semua feedback",
         data
       }
       res.send(response);
