@@ -55,13 +55,14 @@ function findAll(req, res, next) {
         booking.findAll({
           where: {
             userId: id,
-          }
+          },
+          total_price: 0
         })
         .then((data) => {
           const response = {
             status: "success",
             message: "",
-            data: data,
+            data,
           }
           res.send(response);
         })

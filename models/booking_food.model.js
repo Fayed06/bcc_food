@@ -20,7 +20,7 @@ module.exports = (sequelize, Sequelize, booking, food) => {
     },
     sub_price: {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
 
   }, {})
