@@ -120,27 +120,7 @@ function findAll(req, res, next) {
     });
 }
 
-function destroy(req, res, next) {
-  const id = req.params.id;
-  let condition = {
-    id: id,
-  };
 
-  User.destroy({
-      where: condition,
-    })
-    .then((num) => {
-      if (num != 1) {
-        return next(err)
-      }
-      res.status(200).send({
-        message: "Delete successful",
-      });
-    })
-    .catch((err) => {
-      return next(err)
-    });
-}
 
 function profile(req, res) {
   try {
@@ -166,7 +146,6 @@ module.exports = {
   registerUser,
   loginUser,
   findAll,
-  destroy,
   profile,
 
 }

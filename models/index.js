@@ -24,7 +24,6 @@ const restoimg = require("./resto.img.model")(sequelize, Sequelize, restaurants)
 const food = require("./food.model")(sequelize, Sequelize, restaurants)
 const foodCategory = require("./food_categories.model")(sequelize, Sequelize)
 const foodhascategory = require("./foodhascategory.model")(sequelize, Sequelize, restaurants, foodCategory)
-// const bookingpacket = require("./booking_packet.model")(sequelize, Sequelize)
 const booking = require("./booking_model")(sequelize, Sequelize, restaurants, user)
 const bookingfood = require("./booking_food.model")(sequelize, Sequelize, booking, food)
 const review = require("./review.model")(sequelize, Sequelize, booking)
@@ -62,7 +61,6 @@ module.exports = {
     food,
     foodCategory,
     foodhascategory,
-    // bookingpacket,
     booking,
     bookingfood,
     review,

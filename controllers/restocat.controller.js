@@ -3,24 +3,6 @@ const Restocats = db.restocats;
 const restaurants = db.restaurants;
 const restoimg = db.restoimg;
 
-// create categories
-function regCategories(req, res, next) {
-  Restocats.create({
-      ...req.body,
-      image: process.env.DEFAULT_IMAGE
-    })
-    .then((data) => {
-      res.send({
-        ...data.dataValues
-      });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err,
-      });
-    });
-}
-
 // findAll
 function findAll(req, res, next) {
   const limit = req.query.limit ? parseInt(req.query.limit) : null
@@ -75,31 +57,8 @@ function findOne(req, res, next) {
       });
     });
 }
-// delete
-function destroy(req, res, next) {
-  const id = req.params.id;
-  let condition = {
-    id: id,
-  };
 
-  Restocats.destroy({
-      where: condition,
-    })
-    .then((num) => {
-      if (num != 1) {
-        return next(err)
-      }
-      res.status(200).send({
-        message: "Delete successful",
-      });
-    })
-    .catch((err) => {
-      return next(err)
-    });
-}
 module.exports = {
-  regCategories,
   findAll,
   findOne,
-  destroy,
 }

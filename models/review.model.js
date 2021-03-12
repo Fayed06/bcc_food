@@ -7,10 +7,14 @@ module.exports = (sequelize, Sequelize, booking) => {
         key: 'id'
       }
     },
-    name: {
+    content: {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    star: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    }
 
 
   }, {})
