@@ -120,8 +120,6 @@ function findAll(req, res, next) {
     });
 }
 
-
-
 function profile(req, res) {
   try {
     jwt.verify(req.token, process.env.JWT_TOKEN, (err, AuthData) => {

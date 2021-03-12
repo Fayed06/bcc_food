@@ -3,6 +3,8 @@ const restaurants = db.restaurants;
 const restoimg = db.restoimg;
 const food = db.food;
 
+const { Op } = require("sequelize");
+
 // create restaurants
 function regRestaurants(req, res, next) {
   restaurants.create(req.body)
@@ -28,10 +30,10 @@ function findAll(req, res, next) {
         },
         required: false
       }, {
-        model: food
+        model: food 
       }, ],
       limit,
-      offset
+      offset,
     })
     .then((data) => {
       for (let i = 0; i < data.length; i++) {
@@ -92,7 +94,7 @@ function findOne(req, res, next) {
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error in findOne",
+        message: err.message,
       });
     });
 }
