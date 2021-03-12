@@ -19,6 +19,31 @@ function reg(req, res, next) {
     });
 }
 
+function findAll(req, res, next) {
+  suggest.findAll({
+    include:[{
+      model : booking,
+      include: [{
+        model : user,
+      }]
+  
+    }]
+  })
+    .then((data) => {
+      const response = {
+        status: "success",
+        message: "Berhasil menampilkan semua review",
+        data
+      }
+      res.send(response);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message,
+      });
+    });
+}
 module.exports = {
   reg,
+  findAll,
 }
