@@ -15,6 +15,7 @@ module.exports = (sequelize, Sequelize, restaurants, restocats) => {
       }
     }
 
+    
 
   }, {})
   return CatRestocat
